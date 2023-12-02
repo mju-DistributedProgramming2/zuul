@@ -1,4 +1,4 @@
-package com.hsc.zuul;
+package com.omnm.zuul;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +11,9 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import Filter.AuthFilter;
+import Filter.PostFilter;
 
 
 @SpringBootApplication
@@ -44,6 +47,15 @@ public class ZuulApplication extends SpringBootServletInitializer { //implements
 		return bean;
 	}
 	
+	@Bean
+    public AuthFilter preFilter() {
+        return new AuthFilter();
+    }
+	
+	@Bean
+    public PostFilter postFilter() {
+        return new PostFilter();
+    }
 	
 	
 //	@Override
